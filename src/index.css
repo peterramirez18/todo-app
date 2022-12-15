@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+
+@layer base {
+    :root {
+        --very-light-gray: hsl(0, 0%, 98%);
+        --very-light-grayish-blue: hsl(236, 33%, 92%);
+        --light-grayish-blue: hsl(233, 11%, 84%);
+        --dark-grayish-blue: hsl(236, 9%, 61%);
+        --very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+        /* ### Dark Theme */
+        --dark-very-dark-blue: hsl(235, 21%, 11%);
+        --dark-very-dark-desaturated-Blue: hsl(235, 24%, 19%);
+        --dark-light-grayish-blue: hsl(234, 39%, 85%);
+        --dark-light-grayish-blue-hover: hsl(236, 33%, 92%);
+        --dark-dark-grayish-blue: hsl(234, 11%, 52%);
+        --dark-very-dark-grayish-blue: hsl(233, 14%, 35%);
+        --dark-very-dark-grayish-blue-2: hsl(237, 14%, 26%)
+    }
+}
+
+@layer utilities {
+    .box {
+        @apply flex items-center gap-x-3 bg-very-light-gray px-6 py-[21px] rounded-lg
+    }
+
+    .box-dark {
+        @apply flex items-center gap-x-3 bg-dark-very-dark-desaturated-Blue px-6 py-[21px] rounded-lg
+    }
+}
