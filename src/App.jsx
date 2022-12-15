@@ -13,32 +13,7 @@ import ToggleMode from './components/ToggleMode'
 
 const App = () => {
 
-  const Tasks = [
-    {
-      name: 'Complete online javaScript course',
-      status: 'Completed'
-    },
-    {
-      name: 'Jog around the park 3x',
-      status: 'Active'
-    },
-    {
-      name: '10 minutes meditation',
-      status: 'Active'
-    },
-    {
-      name: 'Read for 1 hour',
-      status: 'Active'
-    },
-    {
-      name: 'Pick up groceries',
-      status: 'Active'
-    },
-    {
-      name: 'Complete Todo App on Fronted Mentor',
-      status: 'Active'
-    }
-  ]
+  const Tasks = []
   // states
   const [tasks, setTasks] = useState(Tasks)
   const [tabSelect, setTabSelect] = useState('All')
