@@ -127,11 +127,9 @@ const App = () => {
           </div>
           <input onKeyDown={handleKeyDown} onChange={(e) => setWrite(e.target.value)} value={write} className={` ${isAdd && 'text-red-400'} focus:border-none text-dark-very-dark-grayish-blue focus:outline-none  w-full bg-transparent dark:text-dark-light-grayish-blue-hover `} type="text" placeholder='Create a new todo...' />
           {isAdd && <div className='absolute bg-red-400 text-white p-2 rounded-lg -bottom-12 z-20 left-0 transition-all duration-300'>There's a task with same name</div>}
-          <button>
-            <img
-              onClick={() => handleClickAdd()}
-              className=' rotate-45' src={CrossIcon} alt="" />
-          </button>
+          <img
+            onClick={() => handleClickAdd()}
+            className=' cursor-pointer rotate-45' src={CrossIcon} alt="" />
         </div>
 
         {/* taskss */}
@@ -158,9 +156,8 @@ const App = () => {
                       </div>
                       <span className={`${item.status === "Completed" && 'line-through opacity-50'} text-md tracking-wider dark:text-dark-light-grayish-blue transition-all duration-500`}>{item.name}</span>
                     </div>
-                    <button>
-                      <img onClick={() => handleClickDelete(item.name)} className='w-4 block md:hidden group-hover:block' src={CrossIcon} alt="" />
-                    </button>
+                    <img onClick={() => handleClickDelete(item.name)} className='w-4 block cursor-pointer md:hidden group-hover:block' src={CrossIcon} alt="" />
+
                   </motion.div>
                 ))
               }
