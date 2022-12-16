@@ -137,10 +137,10 @@ const App = () => {
               }
             </div>
           }
-          <div className='flex justify-between  mt-auto items-center gap-x-3  px-6 border-b-2 py-4 text-very-dark-grayish-blue'>
+          <div className='flex  z-10 justify-between  mt-auto items-center gap-x-3  px-6 border-b-2 py-4 text-very-dark-grayish-blue'>
             <span className=' text-dark-grayish-blue'>{getFilteredProjects().length} items left</span>
             {/* tab */}
-            <div className=' hidden md:flex'>
+            <div className=' hidden md:flex '>
               {['All', 'Active', 'Completed'].map((item, index) => (
                 <button key={index} onClick={() => setTabSelect(item)} className={`${tabSelect === item ? 'text-bright-blue cursor-default' : 'text-dark-grayish-blue hover:text-very-dark-grayish-blue'} px-3 `}>{item}</button>
               ))}
