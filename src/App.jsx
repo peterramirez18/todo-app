@@ -19,12 +19,33 @@ const App = () => {
   const [tabSelect, setTabSelect] = useState('All')
   const [thereIsCompleted, setThereIsComplete] = useState(0)
   const [write, setWrite] = useState('')
+  const [itemsLeft, setItemsLeft] = useState(0)
+  const [isAdd, setIsAdd] = useState(false)
 
   useEffect(() => {
     const result = tasks.filter(
       (task) => task.status === "Completed"
     )
     return setThereIsComplete(result.length)
+  })
+  useEffect(() => {
+    const result = tasks.filter(
+      (task) => task.status != "Completed"
+    )
+    return setItemsLeft(result.length)
+  })
+  useEffect(() => {
+    if (tasks.length > 0) {
+      const result = tasks.filter(
+        (task) => task.name
+      )
+      for (let i = 0; i < tasks.length; i++) {
+        if (result[i].name === write) {
+          setIsAdd(true)
+        } else
+          setIsAdd(false)
+      }
+    }
   })
 
   // function
@@ -38,7 +59,7 @@ const App = () => {
   }
 
   const handleClickAdd = () => {
-    if (write != "") {
+    if (write != "" && !isAdd) {
       const newTask = { name: write, status: 'Active' }
       setTasks([...tasks, newTask])
       setWrite("")
@@ -53,9 +74,16 @@ const App = () => {
   const handleClickComplete = (item) => {
     const newTask = tasks.map((task) => {
       if (task.name === item.name) {
-        return {
-          ...task,
-          status: 'Completed'
+        if (task.status != "Completed") {
+          return {
+            ...task,
+            status: 'Completed'
+          }
+        } else {
+          return {
+            ...task,
+            status: 'Active'
+          }
         }
       }
       return task
@@ -93,11 +121,12 @@ const App = () => {
       </div>
       <div className='w-full md:w-[540px] mx-auto  relative mt-[46px] flex flex-1 flex-col gap-y-6'>
         {/* create */}
-        <div className='box dark:box-dark'>
+        <div className={`${isAdd && 'border-red-500 border'} box dark:box-dark relative`}>
           <div>
             <div className=' w-6 h-6 border-2 rounded-full dark:border-dark-very-dark-grayish-blue-2'></div>
           </div>
-          <input onKeyDown={handleKeyDown} onChange={(e) => setWrite(e.target.value)} value={write} className=' focus:border-none focus:outline-none  w-full bg-transparent dark:text-dark-light-grayish-blue-hover' type="text" placeholder='Create a new todo...' />
+          <input onKeyDown={handleKeyDown} onChange={(e) => setWrite(e.target.value)} value={write} className={` ${isAdd && 'text-red-400'} focus:border-none text-dark-very-dark-grayish-blue focus:outline-none  w-full bg-transparent dark:text-dark-light-grayish-blue-hover `} type="text" placeholder='Create a new todo...' />
+          {isAdd && <div className='absolute bg-red-400 text-white p-2 rounded-lg -bottom-12 z-20 left-0 transition-all duration-300'>There's a task with same name</div>}
           <button>
             <img
               onClick={() => handleClickAdd()}
@@ -138,7 +167,7 @@ const App = () => {
             </div>
           }
           <div className='flex  z-10 justify-between  mt-auto items-center gap-x-3  px-6 border-b-2 py-4 text-very-dark-grayish-blue'>
-            <span className=' text-dark-grayish-blue'>{getFilteredProjects().length} items left</span>
+            <span className=' text-dark-grayish-blue'>{itemsLeft} items left</span>
             {/* tab */}
             <div className=' hidden md:flex '>
               {['All', 'Active', 'Completed'].map((item, index) => (
@@ -159,7 +188,7 @@ const App = () => {
         </div>
         <span className=' text-dark-grayish-blue mx-auto font-bold my-5 dark:text-dark-very-dark-grayish-blue'>Drag and drop to reorder list</span>
       </div>
-    </main>
+    </main >
   )
 }
 
